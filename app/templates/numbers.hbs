@@ -5,21 +5,11 @@
 
 <section id="main">
   <ul id="number-list">
+    {{#each model as |list|}}
     <li>
-      <label>1</label>
+      <label>{{list.number}}</label><button class="more">{{list.number}}</button>
     </li>
-    <li>
-      <label>2</label>
-    </li>
-    <li>
-      <label>Fizz</label><button class="more">3</button>
-    </li>
-    <li>
-      <label>4</label>
-    </li>
-    <li>
-      <label>Buzz</label><button class="more">5</button>
-    </li>
+    {{/each}}
   </ul>
 
   <input type="checkbox" id="toggle-all">
