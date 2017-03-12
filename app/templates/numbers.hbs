@@ -1,26 +1,28 @@
-<header id="header">
-  <h1>FizzBuzz</h1>
-  <input type="text" id="search" placeholder="What number are you looking for?" />
-</header>
+<section id="fizzbuzzapp">
+  <header id="header">
+    <h1>FizzBuzz</h1>
+    <input type="text" id="search" placeholder="What number are you looking for?" />
+  </header>
 
-<section id="main">
-  <ul id="number-list">
-    {{#each model as |list|}}
-    <li>
-      <label>{{list.number}}</label><button class="more">{{list.number}}</button>
-    </li>
-    {{/each}}
-  </ul>
+  <section id="main">
+    <ul id="number-list">
+      {{#each model as |list|}}
+      <li>
+        <label>{{list.number}}</label><button class="more">{{list.number}}</button>
+      </li>
+      {{/each}}
+    </ul>
 
-  <input type="checkbox" id="toggle-all">
+    <input type="checkbox" id="toggle-all">
+  </section>
+
+  <footer id="footer">
+    <button id="previous">
+      <strong>Previous</strong> 100
+    </button>
+
+    <button id="next">
+      <strong>Next</strong> 100
+    </button>
+  </footer>
 </section>
-
-<footer id="footer">
-  <button id="previous">
-    <strong>Previous</strong> 100
-  </button>
-
-  <button id="next">
-    <strong>Next</strong> 100
-  </button>
-</footer>
