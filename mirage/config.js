@@ -1,12 +1,12 @@
 export default function() {
   this.namespace = '/api';
 
-  this.get('/numbers', function() {
-    var number = function(n, value) {
-      value += 1;
-      var fizzbuzz = '';
-      fizzbuzz += (value % 3 === 0 ? 'Fizz' : '');
-      fizzbuzz += (value % 5 === 0 ? 'Buzz' : '');
+  let generateNumbers = function(numberToFind) {
+    return Array(100).fill(1).map(function(n, value) {
+      value += numberToFind / 100 * 100;
+      let fizzbuzz = '';
+      fizzbuzz += value % 3 === 0 ? 'Fizz' : '';
+      fizzbuzz += value % 5 === 0 ? 'Buzz' : '';
       return {
         type: 'numbers',
         id: value,
@@ -14,9 +14,14 @@ export default function() {
           number: fizzbuzz || value
         }
       };
-    };
-    return {
-      data: Array(100).fill(1).map(number)
-    };
+    });
+  };
+
+  this.get('/numbers', function(db, request) {
+    if(request.queryParams.id !== undefined) {
+      return { data: generateNumbers(request.queryParams.id) };
+    } else {
+      return { data: generateNumbers(1) };
+    }
   });
 }

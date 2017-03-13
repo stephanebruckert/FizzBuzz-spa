@@ -1,17 +1,20 @@
 <section id="fizzbuzzapp">
   <header id="header">
     <h1>FizzBuzz</h1>
-    <input type="text" id="search" placeholder="What number are you looking for?" />
   </header>
 
   <section id="main">
-    <ul id="number-list">
-      {{#each model as |list|}}
-      <li>
-        <label>{{list.number}}</label>
-      </li>
-      {{/each}}
-    </ul>
+    {{#list-filter
+       filter=(action 'filterByNumber')
+       as |numbers|}}
+      <ul id="number-list">
+        {{#each model as |list|}}
+        <li>
+          <label>{{list.number}}</label>
+        </li>
+        {{/each}}
+      </ul>
+    {{/list-filter}}
   </section>
 
   <footer id="footer">
