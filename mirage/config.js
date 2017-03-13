@@ -2,38 +2,21 @@ export default function() {
   this.namespace = '/api';
 
   this.get('/numbers', function() {
+    var number = function(n, value) {
+      value += 1;
+      var fizzbuzz = '';
+      fizzbuzz += (value % 3 == 0 ? 'Fizz' : '');
+      fizzbuzz += (value % 5 == 0 ? 'Buzz' : '');
+      return {
+        type: 'numbers',
+        id: value,
+        attributes: {
+          number: fizzbuzz || value
+        }
+      }
+    }
     return {
-      data: [{
-        type: 'numbers',
-        id: '1',
-        attributes: {
-          number: 1
-        }
-      }, {
-        type: 'numbers',
-        id: '2',
-        attributes: {
-          number: 2
-        }
-      }, {
-        type: 'numbers',
-        id: '3',
-        attributes: {
-          number: 'Fizz'
-        }
-      }, {
-        type: 'numbers',
-        id: '4',
-        attributes: {
-          number: 4
-        }
-      }, {
-        type: 'numbers',
-        id: '5',
-        attributes: {
-          number: 'Buzz'
-        }
-      }]
-    };
+      data: Array(100).fill(1).map(number)
+    }
   });
 }
