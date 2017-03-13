@@ -8,9 +8,9 @@
        filter=(action 'filterByNumber')
        as |numbers|}}
       <ul id="number-list">
-        {{#each model as |list|}}
+        {{#each numbers as |numberUnit|}}
         <li>
-          <label>{{list.number}}</label>
+          <li>{{number-listing number=numberUnit}}</li>
         </li>
         {{/each}}
       </ul>
