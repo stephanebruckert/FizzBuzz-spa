@@ -14,6 +14,7 @@ export default Ember.Component.extend({
       let filterInputValue = this.get('value');
       this.set('value', filterInputValue);
       let filterAction = this.get('filter');
+      // this calls filterByNumber from controllers/numbers.js
       filterAction(filterInputValue).then((filterResults) => this.set('results', filterResults));
     },
 

@@ -2,11 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    filterByNumber(param) {
-      if (param === '') {
-        param = 1;
+    filterByNumber(offset, limit) {
+      if (offset !== '') {
+        if (limit !== '') {
+          return this.get('store').query('number', { offset: offset, limit: limit });
+        } else {
+          return this.get('store').query('number', { offset: offset });
+        }
+      } else {
+        return this.get('store').findAll('number');
       }
-      return this.get('store').query('number', { id: param });
     }
   }
 });
