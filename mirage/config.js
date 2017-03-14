@@ -1,10 +1,10 @@
 export default function() {
   this.namespace = '/api';
 
-  let generateNumbers = function(numberToFind) {
-    let page = Math.floor(numberToFind/100) * 100;
+  let generateNumbers = function(numberToFind, limit) {
+    let offset = Math.floor(numberToFind/100) * 100;
     return Array(100).fill(1).map(function(n, value) {
-      value += page + 1;
+      value += offset + 1;
       let fizzbuzz = '';
       fizzbuzz += value % 3 === 0 ? 'Fizz' : '';
       fizzbuzz += value % 5 === 0 ? 'Buzz' : '';
@@ -19,8 +19,12 @@ export default function() {
   };
 
   this.get('/numbers', function(db, request) {
-    if(request.queryParams.id !== undefined) {
-      return { data: generateNumbers(request.queryParams.id) };
+    let limit;
+    if(request.queryParams.limit !== undefined) {
+      limit = request.queryParams.limit;
+    }
+    if(request.queryParams.offset !== undefined) {
+      return { data: generateNumbers(request.queryParams.offset, limit) };
     } else {
       return { data: generateNumbers(1) };
     }
