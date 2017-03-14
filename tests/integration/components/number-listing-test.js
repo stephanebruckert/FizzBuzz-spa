@@ -6,7 +6,8 @@ moduleForComponent('number-listing', 'Integration | Component | number listing',
   integration: true
 });
 
-test('should toggle wide class on click', function() {
+test('should toggle wide class on click', function(assert) {
+  assert.expect(0);
   let stubNumber = Ember.Object.create({
     number: 3
   });

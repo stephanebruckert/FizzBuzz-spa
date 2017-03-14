@@ -23,13 +23,15 @@ test('should initially load all listings', function (assert) {
   // with an integration test, you can set up and use your component in the same way your application
   // will use it.
   this.render(hbs`
-    {{#list-filter filter=(action 'filterByNumber') as |results|}}
-      <ul>
-      {{#each results as |item|}}
-        <li class="number">
-          {{item.number}}
+    {{#list-filter
+       filter=(action 'filterByNumber')
+       as |numbers|}}
+      <ul id="number-list">
+        {{#each numbers as |numberUnit|}}
+        <li>
+          {{number-listing number=numberUnit}}
         </li>
-      {{/each}}
+        {{/each}}
       </ul>
     {{/list-filter}}
   `);
@@ -37,8 +39,8 @@ test('should initially load all listings', function (assert) {
   // the wait function will return a promise that will wait for all promises
   // and xhr requests to resolve before running the contents of the then block.
   return wait().then(() => {
-    assert.equal(this.$('.number').length, 3);
-    assert.equal(this.$('.number').first().text().trim(), 1);
+    assert.equal(this.$('label').length, 3);
+    assert.equal(this.$('label').first().text().trim(), 1);
   });
 });
 
@@ -53,22 +55,24 @@ test('should initially load all listings', function (assert) {
   });
 
   this.render(hbs`
-    {{#list-filter filter=(action 'filterByNumber') as |results|}}
-      <ul>
-      {{#each results as |item|}}
-        <li class="number">
-          {{item.number}}
+    {{#list-filter
+       filter=(action 'filterByNumber')
+       as |numbers|}}
+      <ul id="number-list">
+        {{#each numbers as |numberUnit|}}
+        <li>
+          {{number-listing number=numberUnit}}
         </li>
-      {{/each}}
+        {{/each}}
       </ul>
     {{/list-filter}}
   `);
 
   // The keyup event here should invoke an action that will cause the list to be filtered
   // and xhr requests to resolve before running the contents of the then block.
-  this.$('input #search').val('101').keyup();
+  this.$('#search').val('101').keyup();
   return wait().then(() => {
-    assert.equal(this.$('.number').length, 3);
-    assert.equal(this.$('.number').first().text().trim(), 'Buzz');
+    assert.equal(this.$('label').length, 3);
+    assert.equal(this.$('label').first().text().trim(), 'Buzz');
   });
 });
