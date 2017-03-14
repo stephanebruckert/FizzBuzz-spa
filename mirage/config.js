@@ -1,7 +1,7 @@
 export default function() {
   this.namespace = '/api';
 
-  let generateNumbers = function(numberToFind, limit) {
+  let generateNumbers = function(numberToFind) {
     let offset = Math.floor(numberToFind/100) * 100;
     return Array(100).fill(1).map(function(n, value) {
       value += offset + 1;
