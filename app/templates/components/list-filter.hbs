@@ -1,2 +1,11 @@
 {{input value=value key-up=(action 'handleFilterEntry') id="search" placeholder="What number are you looking for?"}}
 {{yield results}}
+<footer id="footer">
+  <button {{action "previous"}} id="previous">
+    <strong>Previous</strong> 100
+  </button>
+
+  <button {{action "next"}} id="next">
+    <strong>Next</strong> 100
+  </button>
+</footer>
