@@ -191,6 +191,7 @@ body {
 
 #number-list li label {
        word-break: break-word;
+       font-weight: 200;
        padding: 3px;
        display: block;
        line-height: 1.2;
@@ -199,6 +200,21 @@ body {
        -ms-transition: color 0.4s;
        -o-transition: color 0.4s;
        transition: color 0.4s;
+}
+
+#number-list li .Fizz {
+      background-color: #FFE990;
+      font-weight: 300;
+}
+
+#number-list li .Buzz {
+      background-color: #FFBC88;
+      font-weight: 400;
+}
+
+#number-list li .FizzBuzz {
+      background-color: #FFAAA2;
+      font-weight: 500;
 }
 
 #number-list li .edit {

@@ -19,13 +19,23 @@ export default Ember.Component.extend({
     },
 
     next() {
-      this.set('value', (parseInt(this.get('value')) || 1) + 100);
+      let lastPossibleOffset = 100000000000;
+      let nextOffset = (parseInt(this.get('value')) || 1) + 100;
+      if (nextOffset > lastPossibleOffset) {
+        nextOffset = lastPossibleOffset;
+      } else {
+        this.set('value', nextOffset);
+      }
       let filterAction = this.get('filter');
       filterAction(this.get('value')).then((filterResults) => this.set('results', filterResults));
     },
 
     previous() {
-      this.set('value', this.get('value') - 100);
+      let nextOffset = this.get('value') - 100;
+      if (nextOffset < 1) {
+        nextOffset = 1;
+      }
+      this.set('value', nextOffset);
       let filterAction = this.get('filter');
       filterAction(this.get('value')).then((filterResults) => this.set('results', filterResults));
     }

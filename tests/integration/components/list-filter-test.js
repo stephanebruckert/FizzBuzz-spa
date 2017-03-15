@@ -7,13 +7,13 @@ moduleForComponent('list-filter', 'Integration | Component | filter listing', {
   integration: true
 });
 
-const ITEMS = [
+const INITIAL_PAGE = [
   {id: 1, value: 1},
   {id: 2, value: 2},
   {id: 3, value: 'Fizz'}
 ];
 
-const FILTERED_ITEMS = [
+const SECOND_PAGE = [
   {id: 101, value: 'Buzz'},
   {id: 102, value: 'Fizz'},
   {id: 103, value: 103}
@@ -23,9 +23,9 @@ test('should initially load all listings', function (assert) {
   // we want our actions to return promises, since they are potentially fetching data asynchronously
   this.on('filterByNumber', (val) => {
     if (val === '') {
-      return RSVP.resolve(ITEMS);
+      return RSVP.resolve(INITIAL_PAGE);
     } else {
-      return RSVP.resolve(FILTERED_ITEMS);
+      return RSVP.resolve(SECOND_PAGE);
     }
   });
 
@@ -53,13 +53,13 @@ test('should initially load all listings', function (assert) {
   });
 });
 
-test('should initially load all listings', function (assert) {
+test('should search a number', function (assert) {
   // we want our actions to return promises, since they are potentially fetching data asynchronously
   this.on('filterByNumber', (val) => {
     if (val === '') {
-      return RSVP.resolve(ITEMS);
+      return RSVP.resolve(INITIAL_PAGE);
     } else {
-      return RSVP.resolve(FILTERED_ITEMS);
+      return RSVP.resolve(SECOND_PAGE);
     }
   });
 
@@ -84,4 +84,35 @@ test('should initially load all listings', function (assert) {
     assert.equal(this.$('label').length, 3);
     assert.equal(this.$('label').first().text().trim(), 'Buzz');
   });
+});
+
+test('should not allow paging backward when on first page', function (assert) {
+  this.on('filterByNumber', (val) => {
+    if (val === '') {
+      return RSVP.resolve(INITIAL_PAGE);
+    } else {
+      return RSVP.resolve(SECOND_PAGE);
+    }
+  });
+
+  this.render(hbs`
+    {{#list-filter
+       filter=(action 'filterByNumber')
+       as |numbers|}}
+      <ul id="number-list">
+        {{#each numbers as |numberUnit|}}
+        <li>
+          {{number-listing number=numberUnit}}
+        </li>
+        {{/each}}
+      </ul>
+    {{/list-filter}}
+  `);
+
+  let label = this.$('label');
+  $('button#previous').on("click", function() {
+    assert.equal(label.length, 3);
+    assert.equal(label.first().text().trim(), 1);
+  });
+  $('button#previous').trigger("click");
 });

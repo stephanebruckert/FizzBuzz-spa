@@ -1,7 +1,6 @@
 # fizz-buzz-spa
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+FizzBuzz client built with Ember.js. Data comes from the [FizzBuzz-api](https://github.com/stephanebruckert/FizzBuzz-api).
 
 ## Prerequisites
 
