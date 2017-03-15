@@ -24,6 +24,11 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.host = 'http://localhost:3000';
+
+    ENV['ember-cli-mirage'] = {
+      enabled: false
+    }
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -40,10 +45,18 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    }
   }
 
   if (environment === 'production') {
+    ENV.host = 'https://fibuzzapi.herokuapp.com';
 
+    ENV['ember-cli-mirage'] = {
+      enabled: false
+    };
   }
 
   return ENV;
