@@ -1,4 +1,4 @@
-# fizz-buzz-spa
+# FizzBuzz-spa
 
 FizzBuzz client built with Ember.js. Data comes from the [FizzBuzz-api](https://github.com/stephanebruckert/FizzBuzz-api).
 

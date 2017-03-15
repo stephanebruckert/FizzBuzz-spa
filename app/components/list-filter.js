@@ -1,5 +1,10 @@
 import Ember from 'ember';
 
+function isNormalInteger(str) {
+    var n = Math.floor(Number(str));
+    return String(n) === str && n >= 0;
+}
+
 export default Ember.Component.extend({
   classNames: ['list-filter'],
   value: '',
@@ -11,11 +16,13 @@ export default Ember.Component.extend({
 
   actions: {
     handleFilterEntry() {
-      let filterInputValue = this.get('value');
-      this.set('value', filterInputValue);
-      let filterAction = this.get('filter');
-      // this calls filterByNumber from controllers/numbers.js
-      filterAction(filterInputValue).then((filterResults) => this.set('results', filterResults));
+      if (isNormalInteger(this.get('value'))) {
+        let filterInputValue = this.get('value');
+        this.set('value', filterInputValue);
+        let filterAction = this.get('filter');
+        // this calls filterByNumber from controllers/numbers.js
+        filterAction(filterInputValue).then((filterResults) => this.set('results', filterResults));
+      }
     },
 
     next() {
