@@ -7,8 +7,17 @@ moduleForComponent('list-filter', 'Integration | Component | filter listing', {
   integration: true
 });
 
-const ITEMS = [{number: 1}, {number: 2}, {number: 'Fizz'}];
-const FILTERED_ITEMS = [{number: 'Buzz'}, {number: 'Fizz'}, {number: 3}];
+const ITEMS = [
+  {id: 1, value: 1},
+  {id: 2, value: 2},
+  {id: 3, value: 'Fizz'}
+];
+
+const FILTERED_ITEMS = [
+  {id: 101, value: 'Buzz'},
+  {id: 102, value: 'Fizz'},
+  {id: 103, value: 103}
+];
 
 test('should initially load all listings', function (assert) {
   // we want our actions to return promises, since they are potentially fetching data asynchronously

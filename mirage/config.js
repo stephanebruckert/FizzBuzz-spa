@@ -9,11 +9,8 @@ export default function() {
       fizzbuzz += value % 3 === 0 ? 'Fizz' : '';
       fizzbuzz += value % 5 === 0 ? 'Buzz' : '';
       return {
-        type: 'numbers',
         id: value,
-        attributes: {
-          number: fizzbuzz || value
-        }
+        value: fizzbuzz || value
       };
     });
   };
@@ -24,9 +21,9 @@ export default function() {
       limit = request.queryParams.limit;
     }
     if(request.queryParams.offset !== undefined) {
-      return { data: generateNumbers(request.queryParams.offset, limit) };
+      return { numbers: generateNumbers(request.queryParams.offset, limit) };
     } else {
-      return { data: generateNumbers(1) };
+      return { numbers: generateNumbers(1) };
     }
   });
 }
