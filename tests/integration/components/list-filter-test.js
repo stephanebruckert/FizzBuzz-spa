@@ -56,7 +56,7 @@ test('should initially load all listings', function (assert) {
 test('should search a number', function (assert) {
   // we want our actions to return promises, since they are potentially fetching data asynchronously
   this.on('filterByNumber', (val) => {
-    if (val === '') {
+    if (val === '' || val <= 100) {
       return RSVP.resolve(INITIAL_PAGE);
     } else {
       return RSVP.resolve(SECOND_PAGE);
@@ -89,7 +89,7 @@ test('should search a number', function (assert) {
 test('should return the first page when asking for number 100', function (assert) {
   // we want our actions to return promises, since they are potentially fetching data asynchronously
   this.on('filterByNumber', (val) => {
-    if (val === '') {
+    if (val === '' || val <= 100) {
       return RSVP.resolve(INITIAL_PAGE);
     } else {
       return RSVP.resolve(SECOND_PAGE);
@@ -122,7 +122,7 @@ test('should return the first page when asking for number 100', function (assert
 
 test('should not allow searching anything else than an integer', function (assert) {
   this.on('filterByNumber', (val) => {
-    if (val === '') {
+    if (val === '' || val <= 100) {
       return RSVP.resolve(INITIAL_PAGE);
     } else {
       return RSVP.resolve(SECOND_PAGE);
@@ -152,7 +152,7 @@ test('should not allow searching anything else than an integer', function (asser
 
 test('should not allow paging backward when on first page', function (assert) {
   this.on('filterByNumber', (val) => {
-    if (val === '') {
+    if (val === '' || val <= 100) {
       return RSVP.resolve(INITIAL_PAGE);
     } else {
       return RSVP.resolve(SECOND_PAGE);
